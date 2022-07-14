@@ -1,15 +1,15 @@
-export default function Filter({ data, setFresh, filter, setFilter }) {
+export default function Filter({ data, setFiltered, filterValue, setFilterValue }) {
     const m = data && data.launches;
 
-    const handleFilter = (filter) => {
-        const result = m.map((d) => d[filter]?.toString());
-        setFresh(result);
-        setFilter(filter);
+    const handleFilter = (filterValue) => {
+        const result = m.map((d) => d[filterValue]?.toString());
+        setFiltered(result);
+        setFilterValue(filterValue);
     };
 
     return (
         <div>
-            <button onClick={() => handleFilter(filter)}>Filter by {filter}</button>
+            <button onClick={() => handleFilter(filterValue)}>Filter by {filterValue}</button>
         </div>
     );
 }

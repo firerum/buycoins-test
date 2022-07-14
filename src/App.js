@@ -6,14 +6,16 @@ import { useState } from "react";
 
 function App() {
     const [value, setValue] = useState("");
-    const [filter, setFilter] = useState();
+    const [filterValue, setFilterValue] = useState();
     const filters = ["upcoming", "mission_name", "id", "RESET"];
 
     const getData = gql`
         query {
-            launches(limit: 10) {
+            launches(limit: 100) {
                 id
                 mission_name
+                launch_year
+                launch_date_utc
                 launch_date_local
                 upcoming
             }
@@ -21,44 +23,66 @@ function App() {
     `;
 
     const { loading, error, data } = useQuery(getData);
-    const [fresh, setFresh] = useState();
+    const [filtered, setFiltered] = useState();
+
+    const m = data && data.launches;
+
+    // group the incoming data according to date
+    const groups =
+        m &&
+        m.reduce((groups, game) => {
+            const date = game.launch_date_utc.split("-")[0];
+            if (!groups[date]) {
+                groups[date] = [];
+            }
+            groups[date].push(game);
+            return groups;
+        }, {});
+
+    // put the grouped data in an array
+    const groupArrays =
+        groups &&
+        Object.keys(groups).map((date) => {
+            return {
+                date,
+                data: groups[date],
+            };
+        });
 
     return (
         <div className="app">
             <Search value={value} setValue={setValue} />
             <div className="filters">
-                {filters.map((d, idx) => (
+                {filters.map((f, idx) => (
                     <Filter
-                        filter={d}
+                        filterValue={f}
                         key={idx}
                         data={data}
-                        setFresh={setFresh}
-                        setFilter={setFilter}
+                        setFiltered={setFiltered}
+                        setFilterValue={setFilterValue}
                     />
                 ))}
             </div>
 
-            {fresh && fresh[0] !== undefined ? (
+            {filtered && filtered[0] !== undefined ? (
                 <div className="data">
                     <h1>Date</h1>
                     <div className="data-wrapper">
                         <ul>
-                            <li>{filter}s</li>
+                            <li>{filterValue}s</li>
                         </ul>
                         <ul>
-                            {fresh.map((d, idx) => (
+                            {filtered.map((d, idx) => (
                                 <li key={idx}>{d}</li>
                             ))}
                         </ul>
                     </div>
                 </div>
             ) : (
-                data &&
-                data.launches.map((d, idx) =>
-                    d.mission_name.toLowerCase().includes(value.toLowerCase()) ? (
-                        <Data data={d} error={error} loading={loading} key={idx} />
-                    ) : null
-                )
+                groupArrays &&
+                groupArrays.map((l) => (
+                    <Data dat={l.date} arr={l.data} error={error} loading={loading} value={value} />
+                ))
             )}
         </div>
     );
