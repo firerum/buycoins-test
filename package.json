@@ -1,7 +1,7 @@
 {
   "name": "buycoins",
   "version": "0.1.0",
-  "homepage": "https://firerum.github.io/buycoins-test",
+  "homepage": "https://firerum.github.io/buycoins-test.git",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.9",
