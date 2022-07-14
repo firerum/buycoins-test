@@ -1,13 +1,99 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    border: 1px solid;
+}
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+button,
+input {
+    padding: 1rem 2rem;
+    border: 2px solid;
+}
+
+input[type="search"] {
+    width: 100%;
+    background-color: #DCEBFB;
+}
+
+input::placeholder {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000;
+}
+
+button {
+    background-color: #EBDFC2;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.data {
+    margin-top: 2rem;
+}
+
+.data > h1 {
+    font-size: 14px;
+    border: 1px solid;
+    padding: 1rem 4rem;
+    width: max-content;
+    background-color: #E4DBDB;
+}
+
+.data > .data-wrapper {
+    display: grid;
+    grid-template-columns: 25% 70%;
+    gap: 5%;
+    margin: 1rem 0;
+}
+
+ul {
+    list-style: none;
+    border: 1px solid;
+    padding: 0 1rem;
+}
+
+ul > li {
+    margin: 1rem 0;
+}
+
+ul:first-of-type {
+    font-weight: bold;
+    background-color: #D8EDD4;
+}
+
+ul:last-of-type {
+    background-color: #B9D9D7;
 }
