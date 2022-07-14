@@ -1,23 +1,6 @@
-export default function Data({ data, loading, error, fresh, filter }) {
+export default function Data({ data, loading, error }) {
     if (loading) return <p>loading...</p>;
     if (error) return <p>error...</p>;
-
-    if (fresh)
-        return (
-            <div className="data">
-                <h1>Date</h1>
-                <div className="data-wrapper">
-                    <ul>
-                        <li>{filter}s</li>
-                    </ul>
-                    <ul>
-                        {fresh.map((d, idx) => (
-                            <li key={idx}>{d}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        );
 
     return (
         <div className="data">
