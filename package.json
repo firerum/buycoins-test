@@ -1,6 +1,7 @@
 {
   "name": "buycoins",
   "version": "0.1.0",
+  "homepage": "https://firerum.github.io/react-gh-pages",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -17,7 +18,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -45,5 +48,8 @@
     "trailingComma": "es5",
     "bracketSpacing": true,
     "jsxBracketSameLine": false
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
